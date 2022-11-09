@@ -15,11 +15,18 @@ gr = gradient(y,t);
 M=max(abs(gr));
 Mind=find(abs(gr)==max(abs(gr))); 
 
-A = [t(Mind), t(Mind+1)];
-B = [y(Mind), y(Mind+1)];
+f=M*t-y(Mind);
 
-line(A,B);
-X0=find(M*t-y(Mind)==0) ;
+X0ind=find((-0.01<=f)&(f<=0.01));
+X0=t(X0ind(1));
+
+X1ind=find((0.99<=f)&(f<=1.01));
+X1=t(X1ind(1));
+
+Xinflex = Mind * t(2)-t(1);
+
+
+
 plot(t,M*t-y(Mind))
 plot(t,gr*25,"r--");
 legend;
