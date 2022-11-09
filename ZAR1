@@ -1,0 +1,25 @@
+clc;
+close all;
+clear;
+
+hold on;
+
+load prech_char04.mat;
+
+plot(t,y,"g:");
+
+%find the first derivation
+gr = gradient(y,t);
+
+%find the point of inflexion
+M=max(abs(gr));
+Mind=find(abs(gr)==max(abs(gr))); 
+
+A = [t(Mind), t(Mind+1)];
+B = [y(Mind), y(Mind+1)];
+
+line(A,B);
+X0=find(M*t-y(Mind)==0) ;
+plot(t,M*t-y(Mind))
+plot(t,gr*25,"r--");
+legend;
