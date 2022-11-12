@@ -17,16 +17,27 @@ Mind=find(abs(gr)==max(abs(gr)));
 
 f=M*t-y(Mind);
 
-X0ind=find((-0.01<=f)&(f<=0.01));
-X0=t(X0ind(1));
+%point vicinity, 
+Tuind=find((-0.01<=f)&(f<=0.01));
+Tu=t(Tuind(1));
 
-X1ind=find((0.99<=f)&(f<=1.01));
-X1=t(X1ind(1));
+Tnind=find((0.99<=f)&(f<=1.01));
+Tn=t(Tnind(1));
 
-Xinflex = Mind * t(2)-t(1);
+Tn = Tn-Tu;
 
+Tinflex = Mind * t(2)-t(1);
 
+TAUu = Tu/Tn;
+
+%selected Tauu = 0,3521 => n=4, Yi = 0.36, T=Tinflex/(n-1)=5.5467, K=1
+
+%DOES NOT WORK FOR SHIT, THIS BULLSHIT SOFTWARE IS FUBAR!!!
+
+fout(t) = 1/((5.5467*t+1).^4);
+
+plot(t,fout);
 
 plot(t,M*t-y(Mind))
-plot(t,gr*25,"r--");
+%plot(t,gr*25,"r--");%draws the gradient
 legend;
